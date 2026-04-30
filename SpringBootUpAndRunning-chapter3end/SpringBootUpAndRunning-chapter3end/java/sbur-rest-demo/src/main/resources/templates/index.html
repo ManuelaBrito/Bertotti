@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cafeteria</title>
+
+    <style>
+        body {
+            background-color: #A67C6D;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            background-color: #260801;
+            color: #F2F2F2;
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 2em;
+            margin: 0;
+        }
+
+        .add-btn {
+            background-color: #593122;
+            color: #F2F2F2;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .add-btn:hover {
+            background-color: #8C5C51;
+            transform: scale(1.05);
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            background-color: #F2F2F2;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background-color: #593122;
+            color: #F2F2F2;
+            padding: 12px;
+            font-weight: 600;
+            text-align: left;
+}
+
+        td {
+            background-color: #F2F2F2;
+            color: #260801;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        tr:hover td {
+            background-color: #A67C6D;
+            color: #F2F2F2;
+        }
+
+        .edit-btn {
+            background-color: #8C5C51;
+            color: #F2F2F2;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .edit-btn:hover {
+            background-color: #593122;
+        }
+
+        .delete-btn {
+            background-color: #8C5C51;
+            color: #F2F2F2;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .delete-btn:hover {
+            background-color: #260801;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(38, 8, 1, 0.8);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: #F2F2F2;
+            margin: 15% auto;
+            padding: 25px;
+            width: 90%;
+            max-width: 350px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .modal-content h3 {
+            color: #593122;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #A67C6D;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .modal-content input:focus {
+            outline: none;
+            border-color: #593122;
+        }
+
+        .modal-content button {
+            background-color: #593122;
+            color: #F2F2F2;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-right: 10px;
+            width: calc(50% - 15px);
+        }
+
+        .modal-content button:hover {
+            background-color: #8C5C51;
+        }
+    td:first-child, th:first-child {
+        max-width: 120px;
+        word-break: break-all;
+        font-size: 12px;
+    }
+
+    /* Ajustar coluna Nome */
+    td:nth-child(2), th:nth-child(2) {
+        min-width: 150px;
+    }
+
+    /* Ajustar coluna Ação */
+    td:last-child, th:last-child {
+        white-space: nowrap;
+        width: 120px;
+    }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1> Coffees Spring</h1>
+        <button class="add-btn" onclick="abrirModal()">+ Adicionar Café</button>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cafe : ${coffees}">
+            <td th:text="${#strings.substring(cafe.id, 0, 8)} + '...'">...</td>
+            <td th:text="${cafe.name}">...</td>
+            <td>
+                <button class="edit-btn" th:data-id="${cafe.id}" th:data-nome="${cafe.name}" onclick="editar(this.getAttribute('data-id'), this.getAttribute('data-nome'))"> Editar</button>
+                <button class="delete-btn" th:data-id="${cafe.id}" onclick="deletar(this.getAttribute('data-id'))"> Excluir</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <h3>➕ Novo Café</h3>
+        <input type="text" id="nome" placeholder="Digite o nome do café" autocomplete="off">
+        <div>
+            <button onclick="salvar()">Salvar</button>
+            <button onclick="fecharModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function abrirModal() {
+        document.getElementById('modal').style.display = 'block';
+        document.getElementById('nome').value = '';
+    }
+
+    function fecharModal() {
+        document.getElementById('modal').style.display = 'none';
+    }
+
+    async function salvar() {
+        const nome = document.getElementById('nome').value.trim();
+        if (!nome) {
+            alert('Digite um nome para o café!');
+            return;
+        }
+
+        const response = await fetch('/coffees', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({name: nome})
+        });
+
+        if (response.ok) location.reload();
+        fecharModal();
+    }
+
+    async function deletar(id) {
+        if (confirm('Tem certeza que deseja excluir este café?')) {
+            const response = await fetch('/coffees/' + id, {method: 'DELETE'});
+            if (response.ok) location.reload();
+        }
+    }
+
+    function editar(id, nomeAtual) {
+        const novoNome = prompt('Editar nome do café:', nomeAtual);
+        if (novoNome && novoNome !== nomeAtual) {
+            editarCafe(id, novoNome);
+        }
+    }
+
+    async function editarCafe(id, novoNome) {
+        const response = await fetch('/coffees/' + id, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({id: id, name: novoNome})
+        });
+
+        if (response.ok) {
+            location.reload();
+        } else {
+            alert('Erro ao editar café');
+        }
+    }
+</script>
+</body>
+</html>
+
