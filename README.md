@@ -1,9 +1,8 @@
 ## Sobre mim ##
 
+Estudante de Banco de Dados na FATEC - Jessen Vital (turma noturna - 2025), com forte imersão no ecossistema Backend. Iniciei meus estudos do zero e, através de dedicação intensiva e superação dos desafios matemáticos e lógicos, rapidamente me inseri no mercado de tecnologia através de projetos práticos.
 
-Iniciei os estudos na área de programação através da Faculdade Jessen Vital - FATEC - em fevereiro de 2025, cursando *banco de dados* no período noturno, como novata aprendi a programar do zero. A lógica e a matemática envolvia o curso em mais de uma vertente, me senti desafiada e me comprometi  a aprender o máximo que eu pudesse. 
-Desde então tenho estudado e melhorado cada dia mais, participei de maratonas, eventos e diversas atividades extra-currículares envolvendo backend, principalmente java. 
-
+Atualmente, concentro meus esforços no desenvolvimento de soluções robustas utilizando Java, participando ativamente de maratonas de programação e eventos técnicos para acelerar meu aprendizado. Minha rotina é pautada pela melhoria contínua, buscando não apenas entender a sintaxe, mas dominar a arquitetura e a lógica por trás de sistemas performáticos.
 
 __________________________________________________________________
 ## Contatos ##
