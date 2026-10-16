@@ -41,7 +41,7 @@ __________________________________________________________________
   <img src="https://img.shields.io/badge/Oracle_Cloud-F80000?style=for-the-badge&logo=oracle&logoColor=white&labelColor=2C2C2C" alt="Oracle Cloud" />
   <img src="https://img.shields.io/badge/Airflow-017CEE?style=for-the-badge&logo=apacheairflow&logoColor=white&labelColor=2C2C2C" alt="Airflow" />
 </div>
-___________________________________________________________________________________________________________________________________________________
+__________________________________________________________________
 
 ## Meus Projetos ##
 
@@ -65,9 +65,10 @@ ________________________________________________________________________________
 </div>
 
 ## **Hard Skills:** ##
-
+Como desenvolvedora nesse projeto, pude compreender os conceitos de algoritmos e entender a funcionalidade de cada 
 
 ## **Soft Skills:** ## 
+Como membro ativo da equipe, tive comprometimento em prestar apoio emocional 
 ___________________________________________________________________________________________________________________________________________________
 
 ## **2025 - 2º Semestre** ##
